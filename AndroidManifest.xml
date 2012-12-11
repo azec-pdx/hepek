@@ -4,10 +4,40 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <!-- Supporting 2.2.x and above -->
+    <!-- Targeting for 4.1.x -->
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="9" />
+        android:targetSdkVersion="16" />
 
+    <!-- Permissions -->
+    
+    <!-- INTERNET access for sockets (Might communicate remotely) -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    
+    <!-- BLUETOOTH access to connect to paired devices -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    
+    <!-- BLUETOOTH_ADMIN access to allow discovery and pairing -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />     
+       
+    <!-- FLASHLIGHT access for some fancy effects -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    
+    <!-- VIBRATE access for some fancy effects -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    
+    <!-- MODIFY_AUDIO_SETTINGS access for some fancy effects -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    
+    <!-- READ_CONTACTS access to be able to sync other contacts who use Hepek -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    
+    <!-- READ_PROFILE access to get some more info about user -->
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+              
+   	 
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
