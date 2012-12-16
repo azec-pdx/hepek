@@ -1,6 +1,6 @@
 package ba.ima.hepek;
 
-import ba.kloc.hepek.R;
+import ba.ima.hepek.R;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;

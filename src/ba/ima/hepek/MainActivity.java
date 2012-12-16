@@ -1,24 +1,18 @@
 package ba.ima.hepek;
 
-
-
-import ba.ima.hepek.R;
+import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.Parameters;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.app.Activity;
-import android.content.Context;
-import android.content.pm.PackageManager;
 import android.view.Menu;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.Button;
 
 public class MainActivity extends Activity {
@@ -59,8 +53,10 @@ public class MainActivity extends Activity {
                 System.out.println("imal flash"+hasFlash);
 				if (hasFlash){
 					if (flashThread==null){
+						/*
 						flashThread = new FlashThread(pattern);
 						flashThread.start();
+						*/
 					}
                 }
 				

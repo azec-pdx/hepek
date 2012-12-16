@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ba.ima.hepek"
-    android:versionCode="2"
+    android:versionCode="3"
     android:versionName="1.0" >
 
     <!-- Supporting 2.2.x and above -->
@@ -61,11 +61,19 @@
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
             android:screenOrientation="portrait">
             <intent-filter>
+                
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="ba.ima.hepek.ShareHepekActivity"
+            android:label="@string/share_activity_name"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait">
+            
+            </activity>
         
     </application>
 

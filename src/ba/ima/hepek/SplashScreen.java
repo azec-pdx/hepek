@@ -1,10 +1,7 @@
 package ba.ima.hepek;
 
-import ba.ima.hepek.R;
 import android.app.Activity;
 import android.content.Intent;
-import android.hardware.Camera;
-import android.hardware.Camera.Parameters;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
