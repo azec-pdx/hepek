@@ -21,7 +21,7 @@
     <!-- BLUETOOTH_ADMIN access to allow discovery and pairing -->
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />     
        
-     <permission android:name="android.permission.FLASHLIGHT"
+    <permission android:name="android.permission.FLASHLIGHT"
              android:permissionGroup="android.permission-group.HARDWARE_CONTROLS"
              android:protectionLevel="normal" />
     
@@ -37,6 +37,7 @@
     <!-- READ_PROFILE access to get some more info about user -->
     <uses-permission android:name="android.permission.READ_PROFILE" />
     
+    <!-- CAMERA ACCESS for FLASHLIGHT (and maybe photo taking in future) -->
     <uses-permission android:name="android.permission.CAMERA" />
               
    	 
