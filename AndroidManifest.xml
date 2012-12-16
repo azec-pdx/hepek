@@ -21,8 +21,9 @@
     <!-- BLUETOOTH_ADMIN access to allow discovery and pairing -->
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />     
        
-    <!-- FLASHLIGHT access for some fancy effects -->
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
+     <permission android:name="android.permission.FLASHLIGHT"
+             android:permissionGroup="android.permission-group.HARDWARE_CONTROLS"
+             android:protectionLevel="normal" />
     
     <!-- VIBRATE access for some fancy effects -->
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -35,6 +36,8 @@
     
     <!-- READ_PROFILE access to get some more info about user -->
     <uses-permission android:name="android.permission.READ_PROFILE" />
+    
+    <uses-permission android:name="android.permission.CAMERA" />
               
    	 
     
@@ -43,24 +46,23 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name="ba.ima.hepek.MainActivity"
-            android:label="@string/app_name" >
+        <activity android:name="ba.ima.hepek.SplashScreen" 
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait">
             <intent-filter>
-                <!--<action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" /> -->
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
-            android:name="ba.ima.hepek.ShareHepekActivity"
-            android:label="@string/share_activity_name">
+            android:name="ba.ima.hepek.MainActivity"
+            android:label="@string/app_name" 
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait">
             <intent-filter>
-                <!--  
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
-                -->
-                
             </intent-filter>
         </activity>
         
