@@ -1,25 +1,38 @@
 package ba.ima.hepek;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.pm.PackageManager;
+
+
+import java.io.IOException;
+
+import ba.ima.hepek.R;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.Parameters;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.view.Menu;
+import android.view.MotionEvent;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements SurfaceHolder.Callback{
 	
 	private Button hepekButton; 
 	FlashThread flashThread=null;
 	MediaPlayer mp;
+	Camera mCamera;
+	public static SurfaceView preview;
+	public static SurfaceHolder mHolder;
 	int dot = 200;      // Length of a Morse Code "dot" in milliseconds
 	int dash = 500;     // Length of a Morse Code "dash" in milliseconds
 	int short_gap = 200;    // Length of Gap Between dots/dashes
@@ -39,6 +52,19 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        preview = (SurfaceView) findViewById(R.id.camSurface);
+        mHolder = preview.getHolder();
+        mHolder.addCallback(this);
+        mCamera = Camera.open();
+        try {
+            mCamera.setPreviewDisplay(mHolder);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        
         this.hepekButton = (Button)this.findViewById(R.id.hepekBtn);
         this.hepekButton.setOnClickListener(new OnClickListener(){
 
@@ -53,10 +79,12 @@ public class MainActivity extends Activity {
                 System.out.println("imal flash"+hasFlash);
 				if (hasFlash){
 					if (flashThread==null){
-						/*
 						flashThread = new FlashThread(pattern);
 						flashThread.start();
-						*/
+					}
+					if (!flashThread.isAlive()){
+						flashThread = new FlashThread(pattern);
+						flashThread.start();
 					}
                 }
 				
@@ -100,40 +128,30 @@ public class MainActivity extends Activity {
     	}
         @Override
         public void run() {
-        	Camera cam=null;
+        	
+        	Parameters params=null;
             // Simulate a slow network
             try {
             	
-            	cam = Camera.open();     
-            	Parameters p = cam.getParameters();
-            	p.setFlashMode(Parameters.FLASH_MODE_TORCH);
-            	if (Build.MANUFACTURER.equalsIgnoreCase("samsung")){
-            		p.setFlashMode(Parameters.FLASH_MODE_ON);
-            	}
-            	cam.setParameters(p);
+            	params = mCamera.getParameters();
+                params.setFlashMode(Parameters.FLASH_MODE_TORCH);
+                mCamera.setParameters(params);      
+                mCamera.startPreview();   
+            	
             	System.out.println("pocinjem flash pattern");
-            	cam.startPreview();
-            	if (Build.MANUFACTURER.equalsIgnoreCase("samsung")){
-            		cam.autoFocus(new AutoFocusCallback() {
-                        public void onAutoFocus(boolean success, Camera camera) {
-                        }
-                    });
-            	}
+            	
             	boolean on=true;
             	for (long l:pattern){
             		if (on){
             			System.out.println("on"+l);
-            			p.setFlashMode(Parameters.FLASH_MODE_TORCH);
-            			if (Build.MANUFACTURER.equalsIgnoreCase("samsung")){
-                    		p.setFlashMode(Parameters.FLASH_MODE_ON);
-                    	}
-                    	cam.setParameters(p);
+            			params.setFlashMode(Parameters.FLASH_MODE_TORCH);
+                        mCamera.setParameters(params);
             			
             			on=false;
             		}else{
             			System.out.println("off"+l);
-            			p.setFlashMode(Parameters.FLASH_MODE_OFF);
-            			cam.setParameters(p);
+            			params.setFlashMode(Parameters.FLASH_MODE_OFF);
+                        mCamera.setParameters(params);
             			on=true;
             		}
             		sleep(l);
@@ -145,8 +163,8 @@ public class MainActivity extends Activity {
              finally {
             	 System.out.println("finaly");
             	try{
-            		cam.stopPreview();
-            		cam.release();
+            		params.setFlashMode(Parameters.FLASH_MODE_OFF);
+                    mCamera.setParameters(params);
             	}
             	catch(Exception e){
             		System.out.println("camstop failed");
@@ -156,5 +174,32 @@ public class MainActivity extends Activity {
         
       }
     }
+
+
+
+	@Override
+	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void surfaceCreated(SurfaceHolder holder) {
+		mHolder = holder;
+        try {
+            mCamera.setPreviewDisplay(mHolder);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+		
+	}
+
+	@Override
+	public void surfaceDestroyed(SurfaceHolder arg0) {
+		// TODO Auto-generated method stub
+		 mCamera.stopPreview();
+         mHolder = null;
+	}
 }
  
