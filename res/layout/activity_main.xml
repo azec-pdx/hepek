@@ -3,7 +3,7 @@
     android:id="@+id/hepek"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/levat"
+    android:background="@drawable/main_background"
     tools:context=".MainActivity" >
 
     <Button
@@ -13,7 +13,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:background="@android:color/transparent"
-        android:minHeight="150dip"
+        android:minHeight="180dip"
         android:minWidth="200dip" />
 
 </RelativeLayout> 
