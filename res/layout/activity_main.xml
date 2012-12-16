@@ -15,5 +15,9 @@
         android:background="@android:color/transparent"
         android:minHeight="180dip"
         android:minWidth="200dip" />
+    <SurfaceView
+    android:id="@+id/camSurface"
+    android:layout_width="1dip"
+    android:layout_height="1dip"/>
 
 </RelativeLayout> 
