@@ -24,6 +24,7 @@ import android.widget.Button;
 public class MainActivity extends Activity {
 	
 	private Button hepekButton; 
+	FlashThread flashThread=null;
 	MediaPlayer mp;
 	int dot = 200;      // Length of a Morse Code "dot" in milliseconds
 	int dash = 500;     // Length of a Morse Code "dash" in milliseconds
@@ -57,7 +58,10 @@ public class MainActivity extends Activity {
 				boolean hasFlash = getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
                 System.out.println("imal flash"+hasFlash);
 				if (hasFlash){
-                	new FlashThread(pattern).start();
+					if (flashThread==null){
+						flashThread = new FlashThread(pattern);
+						flashThread.start();
+					}
                 }
 				
 			}
