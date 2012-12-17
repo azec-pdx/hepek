@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ba.ima.hepek"
-    android:versionCode="6"
+    android:versionCode="7"
     android:versionName="1.0" >
 
     <!-- Supporting 2.2.x and above -->
@@ -13,7 +13,9 @@
     <!-- Permissions -->
     
     <!-- INTERNET access for sockets (Might communicate remotely) -->
-    <!-- <uses-permission android:name="android.permission.INTERNET" />  -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     
     <!-- BLUETOOTH access to connect to paired devices -->
     <!-- <uses-permission android:name="android.permission.BLUETOOTH" />  -->
